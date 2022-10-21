@@ -1,7 +1,7 @@
 import {Box, Button, Checkbox, Container, Divider, FormControlLabel, Grid, Tooltip} from "@mui/material";
 import shuffle from "fisher-yates-shuffle";
 import Slider from "@mui/material/Slider";
-import {useCallback, useEffect, useState} from "react";
+import {useState} from "react";
 
 const alphaList = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 const numbersList = "0123456789".split("");
@@ -33,6 +33,7 @@ function App() {
   const [numbers, setNumbers] = useState(true);
   const [symbols, setSymbols] = useState(true);
   const [noRepeated, setNoRepeated] = useState(true);
+  const [, setStateTrigger] = useState(false);
 
   const generatePassword = (length) => {
     let charList = [];
@@ -57,17 +58,8 @@ function App() {
     return charList.substring(0, length);
   }
 
-  const [pass1, setPass1] = useState(generatePassword(length));
-  const [pass2, setPass2] = useState(generatePassword(length));
-
-  const generatePasswords = useCallback(() => {
-    setPass1(generatePassword(length));
-    setPass2(generatePassword(length));
-  }, [length, letters, numbers, symbols, noRepeated]);
-
-  useEffect(() => {
-    generatePasswords();
-  }, [length, letters, numbers, symbols, noRepeated, generatePasswords]);
+  const pass1 = generatePassword(length);
+  const pass2 = generatePassword(length);
 
   return (
     <Container
@@ -148,7 +140,7 @@ function App() {
         sx={{
           mt: "20px",
         }}
-        onClick={() => generatePasswords()}
+        onClick={() => setStateTrigger((prevState) => !prevState)}
       >Generate passwords</Button>
 
       <Divider
