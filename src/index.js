@@ -1,13 +1,47 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./App.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import {createTheme, ThemeProvider, experimental_sx as sx} from "@mui/material";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const theme = createTheme({
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: sx({
+          borderRadius: "5px",
+          py: "13px",
+          px: "18px",
+          textTransform: "none",
+        }),
+        containedSuccess: sx({
+          backgroundColor: "rgb(63, 192, 127)",
+          fontSize: "15px",
+          fontWeight: 600,
+          ":hover": {
+            backgroundColor: "rgb(50, 180, 110)"
+          }
+        })
+      }
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: sx({
+          py: 0,
+          color: "white"
+        })
+      }
+    }
+  }
+});
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <App/>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
