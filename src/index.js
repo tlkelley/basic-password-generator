@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./App.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {createTheme, ThemeProvider, experimental_sx as sx} from "@mui/material";
+import {createTheme, experimental_sx as sx, ThemeProvider} from "@mui/material";
 
 const theme = createTheme({
   components: {
